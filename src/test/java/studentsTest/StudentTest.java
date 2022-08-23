@@ -3,34 +3,40 @@ package studentsTest;
 import org.junit.Before;
 import org.junit.Test;
 import students.Student;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class StudentTest {
-    Student studentWithNoGrade;
-    Student studentWithOneGrade;
-    Student studentWithMany;
+    private Student student1;
 
     @Before
-    public void setUp(){
-        studentWithNoGrade = new Student();
+    public void setUp() {
+        student1 = new Student(1, "Darien");
 
-        studentWithOneGrade = new Student();
-        studentWithOneGrade.addGrade(80);
-        studentWithOneGrade.getGradeAverage();
-
-        studentWithMany = new Student();
-        studentWithMany.addGrade(80);
-        studentWithMany.addGrade(90);
-        studentWithMany.addGrade(70);
-        studentWithMany.addGrade(100);
-        studentWithMany.getGradeAverage();
     }
 
     @Test
-    public void testIsEmpty() {
-        assertTrue(studentWithNoGrade.getGrades().isEmpty());
-        assertFalse(studentWithNoGrade.getGrades().isEmpty());
+    public void checkId() {
+        assertEquals(1, student1.getId());
+    }
+    @Test
+    public void checkName() {
+        assertEquals("Darien", student1.getName());
+    }
+    @Test
+    public void checkAdd() {
+        assertTrue(student1.getGrades().isEmpty());
+        student1.addGrade(80);
+        assertEquals(1, this.student1.getGrades().size());
+        assertTrue(student1.getGrades().contains(80));
+        student1.addGrade(90);
+        assertEquals(2, this.student1.getGrades().size());
+    }
+    @Test
+    public void checkAverage() {
+        student1.addGrade(80);
+        student1.addGrade(90);
+
+        assertEquals(85, student1.getGradeAverage(), .1);
     }
 }
+

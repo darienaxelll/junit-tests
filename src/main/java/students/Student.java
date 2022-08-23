@@ -2,48 +2,38 @@ package students;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Student {
-    private long id;
-    private String name;
-    private ArrayList<Integer> grades;
+    private  long id;
+    private  String name;
+    private ArrayList<Integer> grades = new ArrayList<>();
 
-    public Student() {
+    public Student(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Student(ArrayList<Integer> grades) {
+        this.grades = grades;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public ArrayList<Integer> getGrades() {
         return grades;
     }
 
-    // adds the given grade to the grades list
     public void addGrade(int grade){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new grade: ");
-        int userInput = scanner.nextInt();
 
-        getGrades().add(userInput);
+        grades.add(grade);
     }
 
-    // returns the average of the students grades
     public double getGradeAverage(){
         DecimalFormat numberFormat = new DecimalFormat("#.0");
 
@@ -54,6 +44,16 @@ public class Student {
         return sum / grades.size();
     }
 
+    public boolean isEmpty() {
+        return grades.size() == 0;
+    }
 
+    public static void main(String[] args) {
+        Student student1 = new Student(1, "Darien");
 
+        student1.addGrade(80);
+        student1.addGrade(90);
+        System.out.println(student1.getGradeAverage());
+    }
 }
+
